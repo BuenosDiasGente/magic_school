@@ -27,9 +27,13 @@ public interface StudentService {
     List<Student> getTheLastFiveStudents();
 
 
-    List<String>getAllNamesWithTheLetterA();
+    List<String> getAllNamesWithTheLetterA();
 
     Integer getAverageAgeOfAllStudents();
 
     Integer getNumber();
+
+    void threads();
+
+    void threadsSync();
 }

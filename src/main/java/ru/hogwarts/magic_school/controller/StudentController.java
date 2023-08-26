@@ -108,6 +108,15 @@ public class StudentController {
         return studentService.getNumber();
     }
 
+    @GetMapping("/threads")
+    public void threads(){
+        studentService.threads();
+    }
+    @GetMapping("/threads-synchronized")
+    public void threadsSync(){
+        studentService.threadsSync();
+    }
+
 
 
 }

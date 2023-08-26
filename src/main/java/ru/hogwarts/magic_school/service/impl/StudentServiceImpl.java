@@ -115,5 +115,58 @@ public class StudentServiceImpl implements StudentService {
                 .reduce(0, (a, b) -> a + b);
     }
 
+    @Override
+    public void threads() {
+        List<Student> students = studentRepository.findAll();
+
+        printName(students.get(0));
+        printName(students.get(1));
+
+        new Thread(() -> {
+            printName(students.get(2));
+            printName(students.get(3));
+        }).start();
+
+        new Thread(() -> {
+            printName(students.get(4));
+            printName(students.get(5));
+        }).start();
+    }
+
+    @Override
+    public void threadsSync() {
+        List<Student> students = studentRepository.findAll();
+        printName(students.get(0));
+        printName(students.get(1));
+
+        new Thread(() -> {
+            printNameSync(students.get(2));
+            printNameSync(students.get(3));
+        }).start();
+
+        new Thread(() -> {
+            printNameSync(students.get(4));
+            printNameSync(students.get(5));
+        }).start();
+    }
+
+    private void printName(Student student) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(student.getName());
+    }
+
+    private synchronized void printNameSync(Student student) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(student.getName());
+    }
+
 
 }
